@@ -77,24 +77,12 @@ var iosbridge = (function(namespace, $, undefined){
 			})
 		}
     	
-    	
-    	/*
-    	bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
-			log('ObjC called testJavascriptHandler with', data)
-			var responseData = { 'Javascript Says':'Right back atcha!' }
-			log('JS responding with', responseData)
-			responseCallback(responseData)
-		})
-    	bridge.callHandler(callHandlerName, {'foo': 'bar'}, function(response) {
-			log('JS got response', response)
-		})
-		*/
     })
     
     namespace.call = function(data){ //외부 노출 함수 public
     	alert(bridge);
     	if(bridge == undefined)return;    	
-    	bridge.callHandler(callHandlerName, data, function responseCallback(responseData) {
+    	bridge.callHandler(registerHandlerName, data, function responseCallback(responseData) {
     		
     	});
     };
