@@ -7,8 +7,8 @@
 var iosbridge = (function(namespace, $, undefined){
 // $ = jQuery임 전역번수를 지역변수로 전달하면 실행함수내에서 지역변수로 사용하기때문에 탐색작업이 좀더 빨라진다
     
-	var registerHandlerName = 'jsRcvResponseTest';
-	var callHandlerName = 'objcEchoToJs';
+//	var registerHandlerName = 'jsRcvResponseTest';
+//	var callHandlerName = 'objcEchoToJs';
 	var bridge;
 	
 	// Example
