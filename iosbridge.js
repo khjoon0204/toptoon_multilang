@@ -41,14 +41,14 @@ var iosbridge = (function(namespace, $, undefined){
 
     	bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
     		//console.log("JS Echo called with:", data);
-    		//alert("JS Echo called with:" + data);
+    		alert("JS Echo called with:" + data);
         	this.bridge = bridge;    		
         	alert('assigned bridge!');
     		responseCallback(data);
     	});
     	bridge.callHandler(callHandlerName, {'key':'value'}, function responseCallback(responseData) {
     		//console.log("JS received response:", responseData);
-    		//alert("JS received response:" + responseData);
+    		alert("JS received response:" + responseData);
     	});
     });
     
