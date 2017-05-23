@@ -22,16 +22,6 @@ var iosbridge = (function(namespace, $, undefined){
         alert(i);      
     };
 
-    namespace.getBridge = function(){
-    	alert("getBridge:"+bridge);
-    	return bridge;
-    }
-    namespace.setBridge = function(pbridge){
-    	alert("setBridge:"+pbridge);
-    	bridge = pbridge;
-    }
-
-    
     
     // Todo
     
@@ -59,8 +49,8 @@ var iosbridge = (function(namespace, $, undefined){
 
     	bridge.registerHandler('jsRcvResponseTest', function(data, responseCallback) {
 			bridge.callHandler('objcEchoToJs', { foo:'bar' }, function(response) {
+				alert("callHandler callback! response = " + response);
 				if (response && response.foo == 'bar') {
-					namespace.setBridge(bridge)
 					responseCallback("Response from JS")
 				} else {
 					responseCallback("Failed")
