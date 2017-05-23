@@ -7,8 +7,8 @@
 var iosbridge = (function(namespace, $, undefined){
 // $ = jQuery임 전역번수를 지역변수로 전달하면 실행함수내에서 지역변수로 사용하기때문에 탐색작업이 좀더 빨라진다
     
-	var registerHandlerName = 'testObjcCallback';
-	var callHandlerName = 'testJavascriptHandler';
+	var registerHandlerName = 'jsRcvResponseTest';
+	var callHandlerName = 'objcEchoToJs';
 	var bridge;
 	
 	// Example
@@ -48,6 +48,18 @@ var iosbridge = (function(namespace, $, undefined){
     	
     	/* Initialize your app here */
 
+    	bridge.registerHandler('jsRcvResponseTest', function(data, responseCallback) {
+			bridge.callHandler('objcEchoToJs', { foo:'bar' }, function(response) {
+				if (response && response.foo == 'bar') {
+					responseCallback("Response from JS")
+				} else {
+					responseCallback("Failed")
+				}
+			})
+		})
+    	
+    	
+    	/*
 
 		var uniqueId = 1
 		function log(message, data) {
@@ -79,6 +91,8 @@ var iosbridge = (function(namespace, $, undefined){
 				log('JS got response', response);
 			});
 		}
+    	*/
+    	
     	
     });
     
