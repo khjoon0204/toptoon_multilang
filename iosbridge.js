@@ -53,6 +53,7 @@ var iosbridge = (function(namespace, $, undefined){
     
     namespace.call = function(data){ //외부 노출 함수 public
     	if(bridge == undefined)return;
+    	alert(bridge);
     	bridge.callHandler(callHandlerName, data, function responseCallback(responseData) {
     		
     	});
