@@ -43,6 +43,7 @@ var iosbridge = (function(namespace, $, undefined){
     		//console.log("JS Echo called with:", data);
     		//alert("JS Echo called with:" + data);
         	this.bridge = bridge;    		
+        	alert('assigned bridge!');
     		responseCallback(data);
     	});
     	bridge.callHandler(callHandlerName, {'key':'value'}, function responseCallback(responseData) {
@@ -52,8 +53,8 @@ var iosbridge = (function(namespace, $, undefined){
     });
     
     namespace.call = function(data){ //외부 노출 함수 public
-    	if(bridge == undefined)return;
     	alert(bridge);
+    	if(bridge == undefined)return;    	
     	bridge.callHandler(callHandlerName, data, function responseCallback(responseData) {
     		
     	});
