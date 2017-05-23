@@ -38,7 +38,7 @@ var iosbridge = (function(namespace, $, undefined){
         // 5.2.0
         //WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
         document.documentElement.appendChild(WVJBIframe);
-        //setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
         
     }
     
