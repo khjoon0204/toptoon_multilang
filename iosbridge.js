@@ -21,7 +21,14 @@ var iosbridge = (function(namespace, $, undefined){
     namespace.func2 = function(){ //외부 노출 함수 public
         alert(i);      
     };
-   
+
+    namespace.getBridge = function(){
+    	return bridge;
+    }
+    namespace.setBridge = function(pbridge){
+    	bridge = pbridge;
+    }
+
     
     
     // Todo
@@ -51,6 +58,7 @@ var iosbridge = (function(namespace, $, undefined){
     	bridge.registerHandler('jsRcvResponseTest', function(data, responseCallback) {
 			bridge.callHandler('objcEchoToJs', { foo:'bar' }, function(response) {
 				if (response && response.foo == 'bar') {
+					namespace.setBridge(bridge)
 					responseCallback("Response from JS")
 				} else {
 					responseCallback("Failed")
