@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ios bridge test page</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="iosbridge.js"></script>
 
@@ -11,11 +11,11 @@
 아이폰 브릿지 테스트 페이지 입니
 <br />
 
-<button onclick='click();' >아이폰으로 데이터 넘기기 </button>
+<a href="javascript:pressedButton();" > 아이폰으로 데이터 넘기기  </a>
 
 <script>
 
-function click(){
+function pressedButton(){
 
 	iosbridge.call('hi call!');
 	
