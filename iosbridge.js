@@ -38,9 +38,10 @@ var iosbridge = (function(namespace, $, undefined){
         // 5.2.0
         //WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
         document.documentElement.appendChild(WVJBIframe);
-        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+        //setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
         
     }
+    
     
     setupWebViewJavascriptBridge(function(bridge) {
     	
@@ -58,26 +59,28 @@ var iosbridge = (function(namespace, $, undefined){
 			else { log.appendChild(el) }
 		}
 
+		alert(bridge);
+		
 		bridge.registerHandler(callHandlerName, function(data, responseCallback) {
-			log('ObjC called testJavascriptHandler with', data)
+			log('ObjC called testJavascriptHandler with', data);
 			var responseData = { 'Javascript Says':'Right back atcha!' }
-			log('JS responding with', responseData)
-			responseCallback(responseData)
-		})
+			log('JS responding with', responseData);
+			responseCallback(responseData);
+		});
 
-		document.body.appendChild(document.createElement('br'))
+		document.body.appendChild(document.createElement('br'));
 
-		var callbackButton = document.getElementById('buttons').appendChild(document.createElement('button'))
-		callbackButton.innerHTML = 'Fire testObjcCallback'
+		var callbackButton = document.getElementById('buttons').appendChild(document.createElement('button'));
+		callbackButton.innerHTML = 'Fire testObjcCallback';
 		callbackButton.onclick = function(e) {
 			//e.preventDefault()
 			log('JS calling handler "testObjcCallback"')
 			bridge.callHandler(registerHandlerName, {'foo': 'bar'}, function(response) {
-				log('JS got response', response)
-			})
+				log('JS got response', response);
+			});
 		}
     	
-    })
+    });
     
     namespace.call = function(data){ //외부 노출 함수 public
     	alert(bridge);
