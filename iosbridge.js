@@ -11,6 +11,8 @@ var iosbridge = (function(namespace, $, undefined){
 	var callHandlerName = 'testJavascriptHandler';
 	var bridge;
 	
+	// Example
+	
 	var i  = 0;
  
     function func1(){ //내부 함수 private
@@ -20,6 +22,7 @@ var iosbridge = (function(namespace, $, undefined){
         alert(i);      
     };
    
+    
     
     // Todo
     
@@ -44,7 +47,7 @@ var iosbridge = (function(namespace, $, undefined){
     	
     	/* Initialize your app here */
 
-    	bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) {
+    	bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
 			log('ObjC called testJavascriptHandler with', data)
 			var responseData = { 'Javascript Says':'Right back atcha!' }
 			log('JS responding with', responseData)
