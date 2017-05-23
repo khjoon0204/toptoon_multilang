@@ -23,9 +23,11 @@ var iosbridge = (function(namespace, $, undefined){
     };
 
     namespace.getBridge = function(){
+    	alert("getBridge:"+bridge);
     	return bridge;
     }
     namespace.setBridge = function(pbridge){
+    	alert("setBridge:"+pbridge);
     	bridge = pbridge;
     }
 
