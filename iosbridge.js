@@ -61,7 +61,7 @@ var iosbridge = (function(namespace, $, undefined){
 
 		alert(bridge);
 		
-		bridge.registerHandler(callHandlerName, function(data, responseCallback) {
+		bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
 			log('ObjC called testJavascriptHandler with', data);
 			var responseData = { 'Javascript Says':'Right back atcha!' }
 			log('JS responding with', responseData);
@@ -75,7 +75,7 @@ var iosbridge = (function(namespace, $, undefined){
 		callbackButton.onclick = function(e) {
 			//e.preventDefault()
 			log('JS calling handler "testObjcCallback"')
-			bridge.callHandler(registerHandlerName, {'foo': 'bar'}, function(response) {
+			bridge.callHandler(callHandlerName, {'foo': 'bar'}, function(response) {
 				log('JS got response', response);
 			});
 		}
@@ -85,7 +85,7 @@ var iosbridge = (function(namespace, $, undefined){
     namespace.call = function(data){ //외부 노출 함수 public
     	alert(bridge);
     	if(bridge == undefined)return;    	
-    	bridge.callHandler(registerHandlerName, data, function(response) {
+    	bridge.callHandler(callHandlerName, data, function(response) {
     		log('JS got response', response)
     	});
     };
