@@ -9,6 +9,7 @@ var iosbridge = (function(namespace, $, undefined){
     
 	var registerHandlerName = 'testObjcCallback';
 	var callHandlerName = 'testJavascriptHandler';
+	var bridge;
 	
 	var i  = 0;
  
@@ -35,18 +36,27 @@ var iosbridge = (function(namespace, $, undefined){
     
     setupWebViewJavascriptBridge(function(bridge) {
     	
+    	
     	/* Initialize your app here */
 
     	bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
-    		console.log("JS Echo called with:", data);
-    		alert("JS Echo called with:" + data);
+    		//console.log("JS Echo called with:", data);
+    		//alert("JS Echo called with:" + data);
+        	this.bridge = bridge;    		
     		responseCallback(data);
-    	})
+    	});
     	bridge.callHandler(callHandlerName, {'key':'value'}, function responseCallback(responseData) {
-    		console.log("JS received response:", responseData);
-    		alert("JS received response:" + responseData);
-    	})
-    })
+    		//console.log("JS received response:", responseData);
+    		//alert("JS received response:" + responseData);
+    	});
+    });
+    
+    namespace.call = function(data){ //외부 노출 함수 public
+    	if(bridge == undefined)return;
+    	bridge.callHandler(callHandlerName, data, function responseCallback(responseData) {
+    		
+    	});
+    };
     
     
     
