@@ -31,9 +31,9 @@ var iosbridge = (function(namespace, $, undefined){
         var WVJBIframe = document.createElement('iframe');
         WVJBIframe.style.display = 'none';
         // 6.0.2
-        //WVJBIframe.src = 'https://__bridge_loaded__';
+        WVJBIframe.src = 'https://__bridge_loaded__';
         // 5.2.0
-        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        //WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
         document.documentElement.appendChild(WVJBIframe);
         setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
         
