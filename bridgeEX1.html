@@ -18,9 +18,29 @@
 <script src="iosbridge.js"></script>
 <script>
 
+$(iosbridge).on('ready', function(){
+	registerRecv();
+});
+
+function registerRecv(){
+	
+	alert('iosbridge.ready!');
+	
+	iosbridge.recv('a', function(data, responseCallback){
+		alert('WEB: recv callback data = ' + data + " response = " + responseCallback);
+		
+	});
+	
+}
+
 function pressedButton(){
 
-	iosbridge.call('hi call!');
+	
+	iosbridge.send('b', 'hi call!', function(name, data, response){
+		
+		alert('WEB: send callback data = ' + data + " response = " + response);
+		
+	});
 	
 }
 

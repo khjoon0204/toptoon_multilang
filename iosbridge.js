@@ -1,18 +1,18 @@
 /**
  *  ios bridge module
+ *  2017.05.24
  *  by haejoon Kim
  *  
  */
 
 var iosbridge = (function(namespace, $, undefined){
-// $ = jQuery임 전역번수를 지역변수로 전달하면 실행함수내에서 지역변수로 사용하기때문에 탐색작업이 좀더 빨라진다
+
+	// $ = jQuery임 전역번수를 지역변수로 전달하면 실행함수내에서 지역변수로 사용하기때문에 탐색작업이 좀더 빨라진다
     
-//	var registerHandlerName = 'jsRcvResponseTest';
-//	var callHandlerName = 'objcEchoToJs';
 	var bridge;
 	
 	// Example
-	
+	/*
 	var i  = 0;
  
     function func1(){ //내부 함수 private
@@ -21,7 +21,10 @@ var iosbridge = (function(namespace, $, undefined){
     namespace.func2 = function(){ //외부 노출 함수 public
         alert(i);      
     };
+    
+    */
 
+    
     
     // Todo
     
@@ -46,67 +49,35 @@ var iosbridge = (function(namespace, $, undefined){
     	
     	
     	/* Initialize your app here */
+    	//alert('bridge Initialize!');
 
-    	bridge.registerHandler('jsRcvResponseTest', function(data, responseCallback) {
-			bridge.callHandler('objcEchoToJs', { foo:'bar' }, function(response) {
-				alert("callHandler callback! response = " + response);
-				if (response && response.foo == 'bar') {
-					responseCallback("Response from JS")
-				} else {
-					responseCallback("Failed")
-				}
-			})
-		})
+
+	    namespace.send = function(name, data, callback){ //외부 노출 함수 public
+	    	if(bridge == undefined)return;    	
+	    	bridge.callHandler(name, data, function(response) {
+	    		//alert('JS got response = '+ response + ' data = ' + data);
+	    		callback(name, data, response);
+	    	});
+	    }
     	
-    	
-    	/*
-
-		var uniqueId = 1
-		function log(message, data) {
-			var log = document.getElementById('log')
-			var el = document.createElement('div')
-			el.className = 'logLine'
-			el.innerHTML = uniqueId++ + '. ' + message + ':<br/>' + JSON.stringify(data)
-			if (log.children.length) { log.insertBefore(el, log.children[0]) }
-			else { log.appendChild(el) }
-		}
-
-		alert(bridge);
-		
-		bridge.registerHandler(registerHandlerName, function(data, responseCallback) {
-			log('ObjC called testJavascriptHandler with', data);
-			var responseData = { 'Javascript Says':'Right back atcha!' }
-			log('JS responding with', responseData);
-			responseCallback(responseData);
-		});
-
-		document.body.appendChild(document.createElement('br'));
-
-		var callbackButton = document.getElementById('buttons').appendChild(document.createElement('button'));
-		callbackButton.innerHTML = 'Fire testObjcCallback';
-		callbackButton.onclick = function(e) {
-			//e.preventDefault()
-			log('JS calling handler "testObjcCallback"')
-			bridge.callHandler(callHandlerName, {'foo': 'bar'}, function(response) {
-				log('JS got response', response);
+	    namespace.recv = function(name, callback){
+	    	if(bridge == undefined)return; 
+	    	bridge.registerHandler(name, function(data, responseCallback) {
+				responseCallback("WEB: recv ios send data = " + data);
+				callback(data, responseCallback);
 			});
-		}
-    	*/
-    	
-    	
+	    }
+
+	    $(namespace).trigger('ready');
+	    
+	    
     });
     
-    namespace.call = function(data){ //외부 노출 함수 public
-    	alert(bridge);
-    	if(bridge == undefined)return;    	
-    	bridge.callHandler(callHandlerName, data, function(response) {
-    		log('JS got response', response)
-    	});
-    };
     
     
     
-    return namespace; //리턴을 해야함 
+    return namespace; //리턴을 해야함
+    
 })(window.namespace || {},jQuery); //객체 없으면 생성
 
 
